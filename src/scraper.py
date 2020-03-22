@@ -45,6 +45,10 @@ state_getters = {
     'IL': {
         'url': 'http://www.dph.illinois.gov/topics-services/diseases-and-conditions/diseases-a-z-list/coronavirus',
         'getter': lambda soup: int(soup.select_one('dl dd .NumberHighlight h3').text)
+    },
+    'KS': {
+        'url': 'https://govstatus.egov.com/coronavirus',
+        'getter': lambda soup: int(soup.select_one('.container > div:nth-of-type(3) .alert').text.split(': ')[1].split()[0])
     }
 }
 
