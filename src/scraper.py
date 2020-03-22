@@ -97,6 +97,10 @@ state_getters = {
     'NY': {
         'url': 'https://coronavirus.health.ny.gov/county-county-breakdown-positive-cases',
         'getter': lambda soup: int(soup.select_one('table tr:last-child td:last-child').text.replace(',', ''))
+    },
+    'OH': {
+        'url': 'https://coronavirus.ohio.gov/wps/portal/gov/covid-19/',
+        'getter': lambda soup: int(soup.select_one('div.odh-ads__item:first-child > div:first-child > div:first-child').text)
     }
 }
 
