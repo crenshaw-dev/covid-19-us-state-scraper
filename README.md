@@ -34,6 +34,8 @@ MO | 90
 NC | 255
 NE | 42
 NH | 65
+NJ | 1914
+
  
  ## Features Needed
  

@@ -85,6 +85,10 @@ state_getters = {
     'NH': {
         'url': 'https://www.nh.gov/covid19/',
         'getter': lambda soup: int(soup.select_one('.summary-list table tr:first-child td:last-child').text)
+    },
+    'NJ': {
+        'url': 'https://www.nj.gov/health/',
+        'getter': lambda soup: int(soup.select_one('table tr:first-child td:last-child').text)
     }
 }
 
