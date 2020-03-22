@@ -101,7 +101,7 @@ if __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--format', help='Output format (default: csv, options: csv)')
+    parser.add_argument('--format', help='Output format (default: csv, options: csv, md)')
     args = parser.parse_args()
 
     stats_format = args.format or 'csv'
