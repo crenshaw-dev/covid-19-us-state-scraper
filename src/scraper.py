@@ -21,6 +21,10 @@ state_getters = {
     'CA': {
         'url': 'https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Immunization/nCOV2019.aspx',
         'getter': lambda soup: int(re.findall('(?:total of )([\d,]+)', soup.select_one('#WebPartWPQ2 > .ms-rtestate-field .NewsItemContent').text)[0].replace(',', ''))
+    },
+    'CO': {
+        'url': 'https://covid19.colorado.gov/data',
+        'getter': lambda soup: int(re.findall('[\d,]+', soup.select_one('article.page .paragraph:first-child .field p:nth-of-type(3)').text)[0])
     }
 }
 
