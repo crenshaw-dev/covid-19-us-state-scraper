@@ -105,6 +105,10 @@ state_getters = {
     'OK': {
         'url': 'https://coronavirus.health.ok.gov/',
         'getter': lambda soup: int(soup.select_one('.pane-3 > div:first-child > table:first-child tr:first-child > td:last-child').text)
+    },
+    'OR': {
+        'url': 'https://govstatus.egov.com/OR-OHA-COVID-19',
+        'getter': lambda soup: int(soup.select_one('#collapseCases table td.table-warning').text)
     }
 }
 
