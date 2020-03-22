@@ -65,6 +65,10 @@ state_getters = {
     'MI': {
         'url': 'https://www.michigan.gov/coronavirus',
         'getter': lambda soup: int(soup.select_one('#comp_114411 table tbody tr:last-child td:nth-of-type(2)').text)
+    },
+    'MN': {
+        'url': 'https://www.health.state.mn.us/diseases/coronavirus/situation.html',
+        'getter': lambda soup: soup.select_one('#body ul li:first-child').text.split(': ')[1]
     }
 }
 
