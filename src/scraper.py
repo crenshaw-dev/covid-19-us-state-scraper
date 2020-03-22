@@ -25,6 +25,10 @@ state_getters = {
     'CO': {
         'url': 'https://covid19.colorado.gov/data',
         'getter': lambda soup: int(re.findall('[\d,]+', soup.select_one('article.page .paragraph:first-child .field p:nth-of-type(3)').text)[0])
+    },
+    'FL': {
+        'url': 'https://floridahealthcovid19.gov/',
+        'getter': lambda soup: int(soup.select_one('#latest-stats .stat--box:last-child h2').text)
     }
 }
 
