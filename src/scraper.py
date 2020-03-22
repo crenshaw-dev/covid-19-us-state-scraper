@@ -81,6 +81,10 @@ state_getters = {
     'NE': {
         'url': 'http://dhhs.ne.gov/Pages/Coronavirus.aspx',
         'getter': lambda soup: int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul li:first-child').text.split()[-1])
+    },
+    'NH': {
+        'url': 'https://www.nh.gov/covid19/',
+        'getter': lambda soup: int(soup.select_one('.summary-list table tr:first-child td:last-child').text)
     }
 }
 
