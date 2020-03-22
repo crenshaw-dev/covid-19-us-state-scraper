@@ -89,6 +89,10 @@ state_getters = {
     'NJ': {
         'url': 'https://www.nj.gov/health/',
         'getter': lambda soup: int(soup.select_one('table tr:first-child td:last-child').text)
+    },
+    'NM': {
+        'url': 'https://cv.nmhealth.org/',
+        'getter': lambda soup: int(soup.select_one('h2.et_pb_module_header > span:nth-child(1)').text)
     }
 }
 
