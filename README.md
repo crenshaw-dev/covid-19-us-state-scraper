@@ -14,6 +14,7 @@ I'm using the [list of state info pages on this page](http://coronavirusapi.com/
  * California
  * Colorado
  * Florida
+ * Georgia
  
  ## Features Needed
  

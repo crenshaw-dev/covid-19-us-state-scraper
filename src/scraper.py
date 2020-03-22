@@ -29,6 +29,10 @@ state_getters = {
     'FL': {
         'url': 'https://floridahealthcovid19.gov/',
         'getter': lambda soup: int(soup.select_one('#latest-stats .stat--box:last-child h2').text)
+    },
+    'GA': {
+        'url': 'https://dph.georgia.gov/covid-19-daily-status-report',
+        'getter': lambda soup: int(soup.select_one('.body-content > table td:last-child').text.split()[0])
     }
 }
 
