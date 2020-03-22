@@ -77,6 +77,10 @@ state_getters = {
     'NC': {
         'url': 'https://www.ncdhhs.gov/covid-19-case-count-nc',
         'getter': lambda soup: int(soup.select_one('table tr:last-child td:first-child').text.strip())
+    },
+    'NE': {
+        'url': 'http://dhhs.ne.gov/Pages/Coronavirus.aspx',
+        'getter': lambda soup: int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul li:first-child').text.split()[-1])
     }
 }
 
