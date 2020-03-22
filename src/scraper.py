@@ -236,18 +236,18 @@ state_getters = {
 class CsvFormatter:
     @staticmethod
     def format(stats_list: list) -> str:
-        csv = 'state,total_cases\n'
+        csv = 'state,total_cases,total_tested,deaths\n'
         for stats in stats_list:
-            csv += f'{stats["state"]},{stats["total_cases"]}\n'
+            csv += f'{stats["state"]},{stats["total_cases"]},{stats.get("total_tested", "")},{stats.get("deaths", "")}\n'
         return csv
 
 
 class MarkdownFormatter:
     @staticmethod
     def format(stats_list: list) -> str:
-        md = 'state | total_cases\n--- | ---\n'
+        md = 'state | total_cases | total_tested | deaths\n--- | --- | --- | ---\n'
         for stats in stats_list:
-            md += f'{stats["state"]} | {stats["total_cases"]}\n'
+            md += f'{stats["state"]} | {stats["total_cases"]} | {stats.get("total_tested", "")} | {stats.get("deaths", "")}\n'
         return md
 
 
