@@ -92,7 +92,7 @@ state_getters = {
     },
     'NM': {
         'url': 'https://cv.nmhealth.org/',
-        'getter': lambda soup: int(soup.select_one('h2.et_pb_module_header > span:nth-child(1)').text)
+        'getter': lambda soup: int(soup.select_one('h2.et_pb_module_header > span:first-child').text)
     },
     'NY': {
         'url': 'https://coronavirus.health.ny.gov/county-county-breakdown-positive-cases',
@@ -101,6 +101,10 @@ state_getters = {
     'OH': {
         'url': 'https://coronavirus.ohio.gov/wps/portal/gov/covid-19/',
         'getter': lambda soup: int(soup.select_one('div.odh-ads__item:first-child > div:first-child > div:first-child').text)
+    },
+    'OK': {
+        'url': 'https://coronavirus.health.ok.gov/',
+        'getter': lambda soup: int(soup.select_one('.pane-3 > div:first-child > table:first-child tr:first-child > td:last-child').text)
     }
 }
 
