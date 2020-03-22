@@ -57,6 +57,10 @@ state_getters = {
     'MA': {
         'url': 'https://www.mass.gov/info-details/covid-19-cases-quarantine-and-monitoring',
         'getter': lambda soup: int(soup.select_one('.page-content table td').text)
+    },
+    'ME': {
+        'url': 'https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus.shtml',
+        'getter': lambda soup: int(soup.select_one('table.travelAdvisories tbody tr:last-child td:last-child').text.replace(',', ''))
     }
 }
 
