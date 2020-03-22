@@ -93,6 +93,10 @@ state_getters = {
     'NM': {
         'url': 'https://cv.nmhealth.org/',
         'getter': lambda soup: int(soup.select_one('h2.et_pb_module_header > span:nth-child(1)').text)
+    },
+    'NY': {
+        'url': 'https://coronavirus.health.ny.gov/county-county-breakdown-positive-cases',
+        'getter': lambda soup: int(soup.select_one('table tr:last-child td:last-child').text.replace(',', ''))
     }
 }
 
