@@ -125,6 +125,10 @@ state_getters = {
     'TX': {
         'url': 'https://www.dshs.state.tx.us/news/updates.shtm',
         'getter': lambda soup: int(soup.select_one('table.zebraBorder:nth-child(7) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)').text)
+    },
+    'VT': {
+        'url': 'https://www.healthvermont.gov/response/infectious-disease/2019-novel-coronavirus',
+        'getter': lambda soup: int(soup.select_one('.dynamic-height-wrap table:nth-child(7) td:nth-child(2)').text)
     }
 }
 
@@ -140,10 +144,9 @@ formatters = {
 }
 
 
-def get_state(url, count_getter):
+def get_state(url, count_getter, verify_cert=False):
     try:
-        # Verify is false because Texas (among maybe others) throws a cert error.
-        soup = BeautifulSoup(requests.get(url, verify=False).content, 'html5lib')
+        soup = BeautifulSoup(requests.get(url, verify=verify_cert).content, 'html5lib')
         return count_getter(soup)
     except Exception as e:
         print(f'Failed to get stats for {state}. Error: {e}', file=sys.stderr)
@@ -161,5 +164,6 @@ if __name__ == '__main__':
     formatter = formatters[stats_format]
     print(formatter['get_header']())
     for state, info in state_getters.items():
-        count = get_state(info['url'], info['getter'])
+        # Don't verify the cert for Texas, because it throws an error.
+        count = get_state(info['url'], info['getter'], verify_cert=(state != 'TX'))
         print(formatter['get_row'](state, count))
