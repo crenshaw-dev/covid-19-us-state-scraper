@@ -49,6 +49,10 @@ state_getters = {
     'KS': {
         'url': 'https://govstatus.egov.com/coronavirus',
         'getter': lambda soup: int(soup.select_one('.container > div:nth-of-type(3) .alert').text.split(': ')[1].split()[0])
+    },
+    'KY': {
+        'url': 'https://govstatus.egov.com/kycovid19',
+        'getter': lambda soup: int(re.findall('(?:Positive: )([\d,]+)', soup.select_one('.container > div:nth-of-type(2) .alert').text)[0].replace(',', ''))
     }
 }
 
