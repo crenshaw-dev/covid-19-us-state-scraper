@@ -203,7 +203,7 @@ class CsvFormatter:
     def format(stats_list: list) -> str:
         csv = 'state,total_cases\n'
         for stats in stats_list:
-            csv += f'{stats["state"]},{stats["stats"]["total_cases"]}\n'
+            csv += f'{stats["state"]},{stats["total_cases"]}\n'
         return csv
 
 
@@ -212,7 +212,7 @@ class MarkdownFormatter:
     def format(stats_list: list) -> str:
         md = 'state | total_cases\n--- | ---\n'
         for stats in stats_list:
-            md += f'{stats["state"]} | {stats["stats"]["total_cases"]}\n'
+            md += f'{stats["state"]} | {stats["total_cases"]}\n'
         return md
 
 
