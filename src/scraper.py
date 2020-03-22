@@ -73,6 +73,10 @@ state_getters = {
     'MO': {
         'url': 'https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/',
         'getter': lambda soup: int(soup.select_one('#main-content table tr:last-child td').text)
+    },
+    'NC': {
+        'url': 'https://www.ncdhhs.gov/covid-19-case-count-nc',
+        'getter': lambda soup: int(soup.select_one('table tr:last-child td:first-child').text.strip())
     }
 }
 
