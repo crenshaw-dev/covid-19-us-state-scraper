@@ -16,13 +16,13 @@ loading from arcgis. Any help pulling data from those sources would be greatly a
 state | total_cases
 --- | ---
 AK | 22
-AL | 138
+AL | 157
 AR | 165
 CA | 1468
-CO | 475
-FL | 830
+CO | 591
+FL | 1007
 GA | 600
-HI | 48
+HI | 56
 ID | 42
 IL | 1049
 KS | 64
@@ -34,7 +34,7 @@ MN | 169
 MO | 90
 NC | 255
 NE | 42
-NH | 65
+NH | 78
 NJ | 1914
 NM | 65
 NY | 15168

@@ -1,5 +1,7 @@
+import os
 import re
 import sys
+import time
 
 import requests
 
@@ -179,10 +181,13 @@ if __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--format', help='Output format (default: csv, options: csv, md, json)')
+    parser.add_argument('--format', help='Output format (default: csv, options: csv, md, json).')
+    parser.add_argument('--outdir', help='Directory to write file. Filename is seconds since epoch.')
     args = parser.parse_args()
 
     stats_format = args.format or 'csv'
+    stats_outdir = args.outdir or None
+
     if stats_format == 'md':
         formatter = MarkdownFormatter
     elif stats_format == 'json':
@@ -193,4 +198,8 @@ if __name__ == '__main__':
     with Pool(len(state_getters)) as pool:
         stats = pool.map(get_state_from_info, state_getters.keys())
 
-    print(formatter.format(stats))
+    if stats_outdir:
+        with open(os.path.join(stats_outdir, f'{int(time.time())}.{stats_format}'), 'w') as text_file:
+            print(formatter.format(stats), file=text_file)
+    else:
+        print(formatter.format(stats))
