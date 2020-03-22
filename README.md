@@ -10,20 +10,21 @@ Output is available as Markdown or CSV. Specify `--format` as `csv` or `md`.
 
 ## Current Counts (March 22 2020)
 
-(Many states are not currently supported.)
+These are the only 30 states I plan to support for now. Others have bot-blockers, client-side rendering, or iframes
+loading from arcgis. Any help pulling data from those sources would be greatly appreciated.
 
 state | total_cases
 --- | ---
-AK | 14
+AK | 22
 AL | 138
 AR | 165
-CA | 1224
+CA | 1468
 CO | 475
 FL | 830
 GA | 600
 HI | 48
 ID | 42
-IL | 753
+IL | 1049
 KS | 55
 KY | 99
 MA | 525
