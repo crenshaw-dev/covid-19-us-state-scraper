@@ -43,6 +43,7 @@ OR | 161
 PA | 479
 SD | 21
 TN | 505
+TX | 334
  
  ## Features Needed
  

@@ -121,6 +121,10 @@ state_getters = {
     'TN': {
         'url': 'https://www.tn.gov/health/cedep/ncov.html',
         'getter': lambda soup: int(soup.select_one('.fifth-color table tr:nth-child(4) > td:nth-child(2)').text)
+    },
+    'TX': {
+        'url': 'https://www.dshs.state.tx.us/news/updates.shtm',
+        'getter': lambda soup: int(soup.select_one('table.zebraBorder:nth-child(7) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)').text)
     }
 }
 
@@ -138,7 +142,8 @@ formatters = {
 
 def get_state(url, count_getter):
     try:
-        soup = BeautifulSoup(requests.get(url).content, 'html5lib')
+        # Verify is false because Texas (among maybe others) throws a cert error.
+        soup = BeautifulSoup(requests.get(url, verify=False).content, 'html5lib')
         return count_getter(soup)
     except Exception as e:
         print(f'Failed to get stats for {state}. Error: {e}', file=sys.stderr)
