@@ -37,6 +37,10 @@ state_getters = {
     'HI': {
         'url': 'https://health.hawaii.gov/docd/advisories/novel-coronavirus-2019/',
         'getter': lambda soup: int(soup.select_one('.primary-content table tr:nth-of-type(2) td:last-child').text.split()[0])
+    },
+    'ID': {
+        'url': 'https://coronavirus.idaho.gov/',
+        'getter': lambda soup: int(soup.select_one('#tablepress-1 .row-10 .column-3').text)
     }
 }
 

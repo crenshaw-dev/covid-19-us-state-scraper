@@ -16,6 +16,7 @@ I'm using the [list of state info pages on this page](http://coronavirusapi.com/
  * Florida
  * Georgia
  * Hawaii
+ * Idaho
  
  ## Features Needed
  
