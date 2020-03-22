@@ -113,6 +113,10 @@ state_getters = {
     'PA': {
         'url': 'https://www.health.pa.gov/topics/disease/coronavirus/Pages/Cases.aspx',
         'getter': lambda soup: int(soup.select_one('table tr:last-child td:nth-of-type(2)').text.strip())
+    },
+    'SD': {
+        'url': 'https://doh.sd.gov/news/Coronavirus.aspx',
+        'getter': lambda soup: int(soup.select_one('div.tableWrapper:nth-child(12) > div:nth-child(2) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2)').text.strip())
     }
 }
 
