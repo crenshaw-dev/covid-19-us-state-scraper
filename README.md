@@ -6,7 +6,7 @@ This is a Python web scraper to get current case counts by US state.
 
 I'm using the [list of state info pages on this page](http://coronavirusapi.com/) to get data sources.
 
-Output is available as Markdown or CSV. Specify `--format` as `csv` or `md`.
+Output is available as CSV, Markdown, or JSON. Specify `--format` as `csv`, `json`, or `md`.
 
 ## Current Counts (March 22 2020)
 
