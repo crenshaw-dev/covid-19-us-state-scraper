@@ -109,6 +109,10 @@ state_getters = {
     'OR': {
         'url': 'https://govstatus.egov.com/OR-OHA-COVID-19',
         'getter': lambda soup: int(soup.select_one('#collapseCases table td.table-warning').text)
+    },
+    'PA': {
+        'url': 'https://www.health.pa.gov/topics/disease/coronavirus/Pages/Cases.aspx',
+        'getter': lambda soup: int(soup.select_one('table tr:last-child td:nth-of-type(2)').text.strip())
     }
 }
 
