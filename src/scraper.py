@@ -1,9 +1,11 @@
+import functools
 import re
 import sys
 
 import requests
 
 from bs4 import BeautifulSoup
+from multiprocessing import Pool
 
 state_getters = {
     'AK': {
@@ -149,8 +151,14 @@ def get_state(url, count_getter, verify_cert=False):
         soup = BeautifulSoup(requests.get(url, verify=verify_cert).content, 'html5lib')
         return count_getter(soup)
     except Exception as e:
-        print(f'Failed to get stats for {state}. Error: {e}', file=sys.stderr)
+        print(f'Failed to get stats for {url}. Error: {e}', file=sys.stderr)
         return ''
+
+
+def get_state_from_info(state):
+    # Don't verify the cert for Texas, because it throws an error.
+    count = get_state(state_getters[state]['url'], state_getters[state]['getter'], verify_cert=(state != 'TX'))
+    return state, count
 
 
 if __name__ == '__main__':
@@ -162,8 +170,10 @@ if __name__ == '__main__':
 
     stats_format = args.format or 'csv'
     formatter = formatters[stats_format]
+
+    with Pool(len(state_getters)) as pool:
+        stats = pool.map(get_state_from_info, state_getters.keys())
+
     print(formatter['get_header']())
-    for state, info in state_getters.items():
-        # Don't verify the cert for Texas, because it throws an error.
-        count = get_state(info['url'], info['getter'], verify_cert=(state != 'TX'))
+    for state, count in stats:
         print(formatter['get_row'](state, count))

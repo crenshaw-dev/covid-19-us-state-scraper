@@ -47,14 +47,13 @@ TN | 505
 TX | 334
 VT | 52
  
- ## Features Needed
- 
- ### Dynamic Page Support
- 
- Some sites are rendered client-side. I'll need either a more full-featured parser than BeautifulSoup or to
- dig in and find the apps' data sources.
- 
- ### Parallel Requests
- 
- Running all the requests sequentially is slow. I'd love to parallelize this.
- 
+## Features Needed
+
+### Dynamic Page Support
+
+Some sites are rendered client-side. I'll need either a more full-featured parser than BeautifulSoup or to
+dig in and find the apps' data sources.
+
+### Parallel Requests
+
+Running all the requests sequentially is slow. I'd love to parallelize this.
