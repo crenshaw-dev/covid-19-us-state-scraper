@@ -48,12 +48,37 @@ state_getters = {
     }
 }
 
-print('state,total_cases')
-for state, info in state_getters.items():
+formatters = {
+    'csv': {
+        'get_header': lambda: 'state,total_cases',
+        'get_row': lambda state, cases: f'{state},{cases}'
+    },
+    'md': {
+        'get_header': lambda:'state | total_cases\n--- | ---',
+        'get_row': lambda state, cases: f'{state} | {cases}'
+    }
+}
+
+
+def get_state(url, count_getter):
     try:
-        soup = BeautifulSoup(requests.get(info['url']).content, 'html5lib')
-        count = info['getter'](soup)
-        print(f'{state},{count}')
+        soup = BeautifulSoup(requests.get(url).content, 'html5lib')
+        return count_getter(soup)
     except Exception as e:
-        print(f'{state},')
         print(f'Failed to get stats for {state}. Error: {e}', file=sys.stderr)
+        return ''
+
+
+if __name__ == '__main__':
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--format', help='Output format (default: csv, options: csv)')
+    args = parser.parse_args()
+
+    stats_format = args.format or 'csv'
+    formatter = formatters[stats_format]
+    print(formatter['get_header']())
+    for state, info in state_getters.items():
+        count = get_state(info['url'], info['getter'])
+        print(formatter['get_row'](state, count))

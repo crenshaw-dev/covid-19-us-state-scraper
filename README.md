@@ -6,18 +6,22 @@ This is a Python web scraper to get current case counts by US state.
 
 I'm using the [list of state info pages on this page](http://coronavirusapi.com/) to get data sources.
 
-## Current States Supported
+## Current Counts (March 22 2020 at 18:42 UTC)
 
- * Alaska
- * Alabama
- * Arkansas
- * California
- * Colorado
- * Florida
- * Georgia
- * Hawaii
- * Idaho
- * Illinois
+(Many states are not currently supported.)
+
+state | total_cases
+--- | ---
+AK | 14
+AL | 138
+AR | 165
+CA | 1224
+CO | 475
+FL | 830
+GA | 600
+HI | 48
+ID | 42
+IL | 753
  
  ## Features Needed
  
