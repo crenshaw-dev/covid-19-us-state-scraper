@@ -48,7 +48,7 @@ state_getters = {
     },
     'KS': {
         'url': 'https://govstatus.egov.com/coronavirus',
-        'getter': lambda soup: int(soup.select_one('.container > div:nth-of-type(3) .alert').text.split(': ')[1].split()[0])
+        'getter': lambda soup: int(soup.select_one('div.row:nth-child(5) > div:nth-child(1) > p:nth-child(1)').text.split(': ')[1].split()[0])
     },
     'KY': {
         'url': 'https://govstatus.egov.com/kycovid19',
