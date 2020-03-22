@@ -53,7 +53,3 @@ VT | 52
 
 Some sites are rendered client-side. I'll need either a more full-featured parser than BeautifulSoup or to
 dig in and find the apps' data sources.
-
-### Parallel Requests
-
-Running all the requests sequentially is slow. I'd love to parallelize this.
