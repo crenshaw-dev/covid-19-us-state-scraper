@@ -1,3 +1,4 @@
+import re
 import sys
 
 import requests
@@ -16,6 +17,10 @@ state_getters = {
     'AR': {
         'url': 'https://www.healthy.arkansas.gov/programs-services/topics/novel-coronavirus',
         'getter': lambda soup: int(soup.select_one('#contentBody > table:nth-of-type(4) tr:first-child > td:last-child').text)
+    },
+    'CA': {
+        'url': 'https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Immunization/nCOV2019.aspx',
+        'getter': lambda soup: int(re.findall('(?:total of )([\d,]+)', soup.select_one('#WebPartWPQ2 > .ms-rtestate-field .NewsItemContent').text)[0].replace(',', ''))
     }
 }
 
