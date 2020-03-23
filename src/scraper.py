@@ -87,7 +87,7 @@ state_getters = {
     'KS': {
         'url': 'https://govstatus.egov.com/coronavirus',
         'stats': {
-            'total_cases': lambda soup: int(soup.select_one('div.row:nth-child(5) > div:nth-child(1) > p:nth-child(1)').text.split(': ')[1].split()[0])
+            'total_cases': lambda soup: int(soup.select_one('p.alert').text.split(': ')[1].split()[0])
         }
     },
     'KY': {
@@ -298,12 +298,14 @@ def get_options():
     parser.add_argument('--format',
                         help='Output format (default: csv, options: csv, md, json). Comma-delimit for multiple, e.g. csv,md.')
     parser.add_argument('--outdir', help='Directory to write file. Filename is seconds since epoch.')
+    parser.add_argument('--daemon', help='Run every N seconds, outputing only if there are changes since the last check.')
     args = parser.parse_args()
 
     stats_format = args.format or 'csv'
     stats_outdir = args.outdir or None
+    stats_daemon = int(args.daemon or '0')
 
-    return stats_format, stats_outdir
+    return stats_format, stats_outdir, stats_daemon
 
 
 def get_formatter(format: str):
@@ -315,17 +317,43 @@ def get_formatter(format: str):
         return CsvFormatter
 
 
+def get_formatted_stats(stats, formatters):
+    return {format: formatter.format(stats) for format, formatter in formatters.items()}
+
+
+def print_stats(formatted_stats_by_format, stats_outdir):
+    for format, formatted_stats in formatted_stats_by_format.items():
+        if stats_outdir:
+            with open(os.path.join(stats_outdir, f'{int(time.time())}.{format}'), 'w') as text_file:
+                print(formatted_stats, file=text_file)
+        else:
+            print(formatted_stats)
+
+
+def get_current_stats():
+    with Pool(len(state_getters)) as pool:
+        return pool.map(get_state_from_info, state_getters.keys())
+
+
 if __name__ == '__main__':
-    formats, stats_outdir = get_options()
+    formats, stats_outdir, daemon_seconds = get_options()
 
     formatters = {format: get_formatter(format) for format in formats.split(',')}
 
-    with Pool(len(state_getters)) as pool:
-        stats = pool.map(get_state_from_info, state_getters.keys())
-
-    for format, formatter in formatters.items():
-        if stats_outdir:
-            with open(os.path.join(stats_outdir, f'{int(time.time())}.{format}'), 'w') as text_file:
-                print(formatter.format(stats), file=text_file)
-        else:
-            print(formatter.format(stats))
+    if daemon_seconds > 0:
+        print(f'Checking stats every {daemon_seconds} seconds.')
+        previous_stats_string = ''
+        while True:
+            print('Checking stats...')
+            current_stats = get_formatted_stats(get_current_stats(), formatters)
+            current_stats_string = ''.join(current_stats.values())
+            if current_stats_string != previous_stats_string:
+                print(f'New stats at {int(time.time())}.')
+                print_stats(current_stats, stats_outdir)
+                previous_stats_string = current_stats_string
+            else:
+                print(f'No new stats at {int(time.time())}.')
+            time.sleep(daemon_seconds)
+    else:
+        current_stats = get_formatted_stats(get_current_stats(), formatters)
+        print_stats(current_stats, stats_outdir)
