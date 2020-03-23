@@ -201,13 +201,19 @@ state_getters = {
     'PA': {
         'url': 'https://www.health.pa.gov/topics/disease/coronavirus/Pages/Cases.aspx',
         'stats': {
-            'total_cases': lambda soup: int(soup.select_one('table tr:last-child td:nth-of-type(2)').text.strip())
+            'total_cases': lambda soup: int(soup.select_one('table tr:last-child td:nth-of-type(2)').text.strip().replace(',', '')),
+            # Confirmed plus negative.
+            'total_tested': lambda soup: int(soup.select_one('table tr:last-child td:nth-of-type(2)').text.strip().replace(',', '')) + int(soup.select_one('table tr:last-child td:nth-of-type(1)').text.strip().replace(',', '')),
+            'deaths': lambda soup: int(re.findall('[\d,]+', soup.select_one('table tr:last-child td:nth-of-type(3)').text.strip())[0].replace(',', '')),
         }
     },
     'SD': {
         'url': 'https://doh.sd.gov/news/Coronavirus.aspx',
         'stats': {
-            'total_cases': lambda soup: int(soup.select_one('div.tableWrapper:nth-child(12) > div:nth-child(2) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2)').text.strip())
+            'total_cases': lambda soup: int(soup.select_one('div.tableWrapper:nth-child(12) > div:nth-child(2) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2)').text.strip()),
+            # Confirmed plus negative.
+            'total_tested': lambda soup: int(soup.select_one('div.tableWrapper:nth-child(12) > div:nth-child(2) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2)').text.strip()) + int(soup.select_one('div.tableWrapper:nth-child(12) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(3) > tr:nth-child(2) > td:nth-child(2)').text.strip()),
+            'deaths': lambda soup: int(soup.select_one('div.tableWrapper:nth-child(12) > div:nth-child(2) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(2) > td:nth-child(2)').text.strip()),
         }
     },
     'TN': {
@@ -219,7 +225,9 @@ state_getters = {
     'TX': {
         'url': 'https://www.dshs.state.tx.us/news/updates.shtm',
         'stats': {
-            'total_cases': lambda soup: int(soup.select_one('table.zebraBorder:nth-child(7) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)').text)
+            'total_cases': lambda soup: int(soup.select_one('table.zebraBorder:nth-child(7) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)').text.replace(',', '')),
+            'total_tested': lambda soup: int(soup.select_one('table.zebraBorder:nth-child(3) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)').text.replace(',', '')),
+            'deaths': lambda soup: int(soup.select_one('table.zebraBorder:nth-child(7) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)').text.replace(',', '')),
         }
     },
     'VT': {
@@ -262,13 +270,16 @@ class JsonFormatter:
 def get_state(url, count_getters, verify_cert=False):
     stats = {}
 
-    for stat_name, stat_getter in count_getters.items():
-        try:
-            soup = BeautifulSoup(requests.get(url, verify=verify_cert).content, 'html5lib')
-            stats[stat_name] = stat_getter(soup)
-        except Exception as e:
-            print(f'Failed to get stats for {url}. Error: {e}', file=sys.stderr)
-            stats[stat_name] = ''
+    try:
+        soup = BeautifulSoup(requests.get(url, verify=verify_cert).content, 'html5lib')
+        for stat_name, stat_getter in count_getters.items():
+            try:
+                stats[stat_name] = stat_getter(soup)
+            except Exception as e:
+                print(f'Failed to get stats for {url}, stat {stat_name}. Error: {e}', file=sys.stderr)
+                stats[stat_name] = ''
+    except Exception as e:
+        print(f'Failed to get stats for {url}. Error: {e}', file=sys.stderr)
 
     return stats
 
