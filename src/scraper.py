@@ -291,29 +291,41 @@ def get_state_from_info(state):
     return stats
 
 
-if __name__ == '__main__':
+def get_options():
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--format', help='Output format (default: csv, options: csv, md, json).')
+    parser.add_argument('--format',
+                        help='Output format (default: csv, options: csv, md, json). Comma-delimit for multiple, e.g. csv,md.')
     parser.add_argument('--outdir', help='Directory to write file. Filename is seconds since epoch.')
     args = parser.parse_args()
 
     stats_format = args.format or 'csv'
     stats_outdir = args.outdir or None
 
-    if stats_format == 'md':
-        formatter = MarkdownFormatter
-    elif stats_format == 'json':
-        formatter = JsonFormatter
+    return stats_format, stats_outdir
+
+
+def get_formatter(format: str):
+    if format == 'md':
+        return MarkdownFormatter
+    elif format == 'json':
+        return JsonFormatter
     else:
-        formatter = CsvFormatter
+        return CsvFormatter
+
+
+if __name__ == '__main__':
+    formats, stats_outdir = get_options()
+
+    formatters = {format: get_formatter(format) for format in formats.split(',')}
 
     with Pool(len(state_getters)) as pool:
         stats = pool.map(get_state_from_info, state_getters.keys())
 
-    if stats_outdir:
-        with open(os.path.join(stats_outdir, f'{int(time.time())}.{stats_format}'), 'w') as text_file:
-            print(formatter.format(stats), file=text_file)
-    else:
-        print(formatter.format(stats))
+    for format, formatter in formatters.items():
+        if stats_outdir:
+            with open(os.path.join(stats_outdir, f'{int(time.time())}.{format}'), 'w') as text_file:
+                print(formatter.format(stats), file=text_file)
+        else:
+            print(formatter.format(stats))

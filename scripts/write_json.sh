@@ -2,8 +2,6 @@
 
 while true
 do
-  python ../src/scraper.py --format csv --outdir ../data
-  python ../src/scraper.py --format md --outdir ../data
-  python ../src/scraper.py --format json --outdir ../data
+  python ../src/scraper.py --format csv,md,json --outdir ../data
   sleep 1h
 done
