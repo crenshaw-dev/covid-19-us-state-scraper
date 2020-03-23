@@ -18,9 +18,9 @@ state_getters = {
     'AL': {
         'url': 'http://alabamapublichealth.gov/infectiousdiseases/2019-coronavirus.html',
         'stats': {
-            'total_cases': lambda soup: int(soup.select_one('.mainContent > table > tbody > tr:last-child > td:last-child').text),
-            'total_tested': lambda soup: int(re.findall('[\d,]+', soup.select_one('div.row:nth-child(3) > p:nth-child(13)').text.split()[2].replace(',', ''))[0]),
-            'deaths': lambda soup: int(re.findall('[\d,]+', soup.select_one('div.row:nth-child(3) > p:nth-child(13)').text.split()[3].replace(',', ''))[0])
+            'total_cases': lambda soup: int(soup.select_one('div.row:nth-child(3) > table:nth-child(13) > tbody:nth-child(1) > tr:last-child > td:last-child').text),
+            'total_tested': lambda soup: int(re.findall('[\d,]+', soup.select_one('div.row:nth-child(3) > p:nth-child(15)').text.split()[2].replace(',', ''))[0]),
+            'deaths': lambda soup: int(re.findall('[\d,]+', soup.select_one('div.row:nth-child(3) > p:nth-child(15)').text.split()[3].replace(',', ''))[0])
         }
     },
     'AR': {
