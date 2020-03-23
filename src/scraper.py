@@ -188,8 +188,9 @@ state_getters = {
         'stats': {
             'total_cases': lambda soup: int(soup.select_one('.pane-3 > div:first-child > table:first-child tr:first-child > td:last-child').text),
             # Positive plus negative.
-            'total_tested': lambda soup: int(soup.select_one('.pane-3 > div:first-child > table:first-child tr:first-child > td:last-child').text) + int(soup.select_one('.pane-3 > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(2)').text),
-            'deaths': lambda soup: int(soup.select_one('.pane-3 > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(6) > td:nth-child(2)').text),
+            # Negative results no longer listed.
+            #'total_tested': lambda soup: int(soup.select_one('.pane-3 > div:first-child > table:first-child tr:first-child > td:last-child').text) + int(soup.select_one('.pane-3 > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(2)').text),
+            'deaths': lambda soup: int(soup.select_one('.pane-3 > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:last-child > td:last-child').text),
         }
     },
     'OR': {
@@ -247,7 +248,7 @@ class CsvFormatter:
     def format(stats_list: list) -> str:
         csv = 'state,total_cases,total_tested,deaths\n'
         for stats in stats_list:
-            csv += f'{stats["state"]},{stats["total_cases"]},{stats.get("total_tested", "")},{stats.get("deaths", "")}\n'
+            csv += f'{stats["state"]},{stats.get("total_cases", "")},{stats.get("total_tested", "")},{stats.get("deaths", "")}\n'
         return csv
 
 
@@ -256,7 +257,7 @@ class MarkdownFormatter:
     def format(stats_list: list) -> str:
         md = 'state | total_cases | total_tested | deaths\n--- | --- | --- | ---\n'
         for stats in stats_list:
-            md += f'{stats["state"]} | {stats["total_cases"]} | {stats.get("total_tested", "")} | {stats.get("deaths", "")}\n'
+            md += f'{stats["state"]} | {stats.get("total_cases", "")} | {stats.get("total_tested", "")} | {stats.get("deaths", "")}\n'
         return md
 
 
