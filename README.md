@@ -8,7 +8,7 @@ I'm using the [list of state info pages on this page](http://coronavirusapi.com/
 
 Output is available as CSV, Markdown, or JSON. Specify `--format` as `csv`, `json`, or `md`.
 
-## Current Counts (March 22 2020)
+## Current Counts (March 23 2020)
 
 These are the only 30 states I plan to support for now. Others have bot-blockers, client-side rendering, or iframes
 loading from arcgis. Any help pulling data from those sources would be greatly appreciated.
