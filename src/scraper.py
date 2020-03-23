@@ -153,7 +153,8 @@ state_getters = {
         'url': 'https://www.nh.gov/covid19/',
         'stats': {
             'total_cases': lambda soup: int(soup.select_one('.summary-list table tr:first-child td:last-child').text.replace(',', '')),
-            'total_tested': lambda soup: int(soup.select_one('.summary-list table tr:nth-of-type(2) td:last-child').text.replace(',', '')),
+            'total_tested': lambda soup: int(soup.select_one('.summary-list table tr:nth-of-type(4) td:last-child').text.replace(',', '')),
+            'deaths': lambda soup: int(soup.select_one('.summary-list table tr:nth-of-type(2) td:last-child').text.split()[0].replace(',', '')),
         }
     },
     'NJ': {
