@@ -56,7 +56,7 @@ state_getters = {
         'stats': {
             'total_cases': lambda soup: int(soup.select_one('.body-content > table td:last-child').text.split()[0]),
             # Commercial plus state labs.
-            'total_tests': lambda soup: int(soup.select_one('table.stacked-row-plus:nth-child(13) > tbody:nth-child(3) > tr:nth-child(1) > td:nth-child(3)').text.split()[0]) + int(soup.select_one('table.stacked-row-plus:nth-child(13) > tbody:nth-child(3) > tr:nth-child(2) > td:nth-child(3)').text.split()[0]),
+            'total_tests': lambda soup: int(soup.select_one('table.stacked-row-plus:nth-child(15) > tbody:nth-child(3) > tr:nth-child(1) > td:nth-child(3)').text.split()[0]) + int(soup.select_one('table.stacked-row-plus:nth-child(15) > tbody:nth-child(3) > tr:nth-child(2) > td:nth-child(3)').text.split()[0]),
             'deaths': lambda soup: int(soup.select_one('.body-content > table tr:last-child td:last-child').text.split()[0])
         }
     },
@@ -121,7 +121,8 @@ state_getters = {
         'url': 'https://www.health.state.mn.us/diseases/coronavirus/situation.html',
         'stats': {
             'total_cases': lambda soup: int(soup.select_one('#body ul li:first-child').text.split(': ')[1]),
-            'total_tested': lambda soup: int(soup.select_one('#body ul li:nth-of-type(3)').text.split(': ')[1]),
+            # Minnesota removed test counts between 1584979264 and 1584979332.
+            #'total_tested': lambda soup: int(soup.select_one('#body ul li:nth-of-type(3)').text.split(': ')[1]),
             'deaths': lambda soup: int(soup.select_one('#body ul li:nth-of-type(2)').text.split(': ')[1]),
         }
     },
