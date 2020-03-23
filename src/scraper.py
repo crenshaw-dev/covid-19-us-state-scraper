@@ -188,8 +188,7 @@ state_getters = {
         'stats': {
             'total_cases': lambda soup: int(soup.select_one('.pane-3 > div:first-child > table:first-child tr:first-child > td:last-child').text),
             # Positive plus negative.
-            # Negative results no longer listed.
-            #'total_tested': lambda soup: int(soup.select_one('.pane-3 > div:first-child > table:first-child tr:first-child > td:last-child').text) + int(soup.select_one('.pane-3 > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(2)').text),
+            'total_tested': lambda soup: int(soup.select_one('.pane-3 > div:first-child > table:first-child tr:first-child > td:last-child').text) + int(soup.select_one('.pane-3 > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(2)').text),
             'deaths': lambda soup: int(soup.select_one('.pane-3 > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:last-child > td:last-child').text),
         }
     },
