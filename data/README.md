@@ -2,4 +2,5 @@
 
 Each file is named for the number of seconds since the epoch at the time the stats were collected.
 
-I'll add data periodically. Hopefully at some point I'll automate data collection on an hourly basis.
+At first I had these updating on a one-hour loop. Now checks are performed every 60sec and files created only if there
+are changes.
