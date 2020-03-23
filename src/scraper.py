@@ -233,9 +233,9 @@ state_getters = {
     'VT': {
         'url': 'https://www.healthvermont.gov/response/infectious-disease/2019-novel-coronavirus',
         'stats': {
-            'total_cases': lambda soup: int(soup.select_one('.dynamic-height-wrap > div:nth-child(1) > table:nth-child(8) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)').text),
-            'total_tested': lambda soup: int(soup.select_one('.dynamic-height-wrap > div:nth-child(1) > table:nth-child(8) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)').text),
-            'deaths': lambda soup: int(soup.select_one('.dynamic-height-wrap > div:nth-child(1) > table:nth-child(8) > tbody:nth-child(1) > tr:nth-child(3) > td:nth-child(2)').text),
+            'total_cases': lambda soup: int(soup.select_one('.dynamic-height-wrap > div:nth-child(1) > table:nth-child(8) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)').text.replace(',', '')),
+            'total_tested': lambda soup: int(soup.select_one('.dynamic-height-wrap > div:nth-child(1) > table:nth-child(8) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)').text.replace(',', '')),
+            'deaths': lambda soup: int(soup.select_one('.dynamic-height-wrap > div:nth-child(1) > table:nth-child(8) > tbody:nth-child(1) > tr:nth-child(3) > td:nth-child(2)').text.replace(',', '')),
         }
     }
 }
