@@ -144,9 +144,9 @@ state_getters = {
     'NE': {
         'url': 'http://dhhs.ne.gov/Pages/Coronavirus.aspx',
         'stats': {
-            'total_cases': lambda soup: int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul li:first-child').text.split()[-1]),
+            'total_cases': lambda soup: int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-child(27) > li:nth-child(1)').text.split()[-1]),
             # Confirmed plus negative.
-            'total_tested': lambda soup: int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul li:first-child').text.split()[-1]) + int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-of-type(2) li').text.split()[-1]),
+            'total_tested': lambda soup: int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-child(27) > li:nth-child(1)').text.split()[-1]) + int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-child(28) > li:nth-child(1)').text.split()[-1].replace('*', '')),
         }
     },
     'NH': {
@@ -168,7 +168,7 @@ state_getters = {
         'url': 'https://cv.nmhealth.org/',
         'stats': {
             'total_cases': lambda soup: int(soup.select_one('h2.et_pb_module_header > span:first-child').text.replace(',', '')),
-            'total_tested': lambda soup: int(soup.select_one('.et_pb_text_2 > div:nth-child(1) > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(3) > td:nth-child(2)').text.replace(',', '')),
+            'total_tested': lambda soup: int(soup.select_one('.et_pb_text_1 > div:nth-child(1) > table:nth-child(2) > tbody:nth-child(1) > tr:nth-child(3) > td:nth-child(2)').text.replace(',', '')),
         }
     },
     'NY': {
