@@ -144,9 +144,9 @@ state_getters = {
     'NE': {
         'url': 'http://dhhs.ne.gov/Pages/Coronavirus.aspx',
         'stats': {
-            'total_cases': lambda soup: int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-child(18) > li:nth-child(1)').text.split()[-1]),
+            'total_cases': lambda soup: int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-child(17) > li:nth-child(1)').text.split()[-1]),
             # Confirmed plus negative.
-            'total_tested': lambda soup: int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-child(18) > li:nth-child(1)').text.split()[-1]) + int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-child(19) > li:nth-child(1)').text.split()[-1].replace('*', '')),
+            'total_tested': lambda soup: int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-child(17) > li:nth-child(1)').text.split()[-1]) + int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-child(18) > li:nth-child(1)').text.split()[-1].replace('*', '')),
         }
     },
     'NH': {
