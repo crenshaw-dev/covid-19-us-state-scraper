@@ -10,7 +10,7 @@ Output is available as CSV, Markdown, or JSON. Specify `--format` as `csv`, `jso
 
 **Caution**: Be _very_ careful if running this script in a loop. Let's not overload anyone's servers.
 
-## Stats (as of Tuesday, March 24, 2020 5:10:43 PM GMT)
+## Stats (as of Tuesday, March 24, 2020 5:15:35 PM GMT)
 
 These are the only 30 states I plan to support for now. Others have bot-blockers, client-side rendering, or iframes
 loading from arcgis. Any help pulling data from those sources would be greatly appreciated.
