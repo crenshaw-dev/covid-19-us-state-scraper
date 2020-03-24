@@ -10,7 +10,7 @@ Output is available as CSV, Markdown, or JSON. Specify `--format` as `csv`, `jso
 
 **Caution**: Be _very_ careful if running this script in a loop. Let's not overload anyone's servers.
 
-## Stats (as of Tuesday, March 24, 2020 3:32:24 PM GMT)
+## Stats (as of Tuesday, March 24, 2020 5:10:43 PM GMT)
 
 These are the only 30 states I plan to support for now. Others have bot-blockers, client-side rendering, or iframes
 loading from arcgis. Any help pulling data from those sources would be greatly appreciated.
@@ -23,7 +23,7 @@ AR | 206 |  |
 CA | 1733 |  | 27
 CO | 720 | 6224 | 7
 FL | 1412 |  | 18
-GA | 800 |  | 26
+GA | 1026 |  | 32
 HI | 77 |  | 4
 ID | 2 |  | 0
 IL | 1285 | 9868 | 12
@@ -32,7 +32,7 @@ KY | 124 | 1866 |
 MA | 777 |  | 
 ME | 118 | 3132 | 
 MI | 293 |  | 7
-MN | 235 |  | 1
+MN | 262 | 5812 | 1
 MO | 183 |  | 3
 NC | 398 | 8502 | 0
 NE | 52 | 1027 | 
@@ -41,13 +41,13 @@ NJ | 2844 |  | 27
 NM | 83 | 5973 | 
 NY | 20875 |  | 
 OH | 442 |  | 6
-OK | 81 | 775 | 2
+OK | 106 | 841 | 3
 OR | 191 | 3840 | 
-PA | 644 | 7239 | 6
-SD | 28 | 790 | 1
+PA | 851 | 9494 | 7
+SD | 30 | 820 | 1
 TN | 615 |  | 
 TX | 410 | 11167 | 9
-VT | 75 | 1173 | 5
+VT | 95 | 1535 | 7
 
 ## Features Needed
 

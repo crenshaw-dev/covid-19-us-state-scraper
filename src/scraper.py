@@ -121,9 +121,8 @@ state_getters = {
         'url': 'https://www.health.state.mn.us/diseases/coronavirus/situation.html',
         'stats': {
             'total_cases': lambda soup: int(soup.select_one('#body ul li:first-child').text.split(': ')[1]),
-            # Minnesota removed test counts between 1584979264 and 1584979332.
-            #'total_tested': lambda soup: int(soup.select_one('#body ul li:nth-of-type(3)').text.split(': ')[1]),
-            'deaths': lambda soup: int(soup.select_one('#body ul li:nth-of-type(2)').text.split(': ')[1]),
+            'total_tested': lambda soup: int(soup.select_one('#body ul li:nth-of-type(2)').text.split(': ')[1]),
+            'deaths': lambda soup: int(soup.select_one('#body > ul:nth-child(6) > li:nth-child(1)').text.split(': ')[1]),
         }
     },
     'MO': {
