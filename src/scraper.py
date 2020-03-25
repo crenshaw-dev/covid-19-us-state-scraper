@@ -64,26 +64,28 @@ state_getters = {
         'url': 'https://health.hawaii.gov/docd/advisories/novel-coronavirus-2019/',
         'stats': {
             'total_cases': lambda soup: int(soup.select_one('.primary-content table tr:nth-of-type(2) td:last-child').text.split()[0]),
-            'deaths': lambda soup: int(soup.select_one('.alignleft > tbody:nth-child(1) > tr:nth-child(10) > td:nth-child(2)').text.split()[0])
+            'deaths': lambda soup: int(soup.select_one('.alignleft > tbody:nth-child(1) > tr:nth-child(12) > td:nth-child(2)').text.split()[0])
         }
     },
     'ID': {
         'url': 'https://coronavirus.idaho.gov/',
         'stats': {
-            'total_cases': lambda soup: int(soup.select_one('#tablepress-1 .row-10 .column-3').text),
+            'total_cases': lambda soup: int(soup.select_one('#tablepress-1 .row-10 .column-3').text.replace(',', '')),
             # State plus commercial tests.
-            'total_tests': lambda soup: int(soup.select_one('#tablepress-2 > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)').text) + int(soup.select_one('#tablepress-2 > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)').text),
-            'deaths': lambda soup: int(soup.select_one('#tablepress-1 .row-10 .column-4').text),
+            'total_tests': lambda soup: int(soup.select_one('#tablepress-2 > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)').text.replace(',', '')) + int(soup.select_one('#tablepress-2 > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)').text.replace(',', '')),
+            'deaths': lambda soup: int(soup.select_one('#tablepress-1 .row-10 .column-4').text.replace(',', '')),
         }
     },
-    'IL': {
-        'url': 'http://www.dph.illinois.gov/topics-services/diseases-and-conditions/diseases-a-z-list/coronavirus',
-        'stats': {
-            'total_cases': lambda soup: int(soup.select_one('dl dd .NumberHighlight h3').text),
-            'deaths': lambda soup: int(soup.select_one('.ckeditor-tabber > dd:nth-child(2) > div:nth-child(3) > div:nth-child(3) > h3:nth-child(2)').text),
-            'total_tested': lambda soup: int(soup.select_one('.ckeditor-tabber > dd:nth-child(2) > div:nth-child(3) > div:nth-child(4) > h3:nth-child(2)').text),
-        }
-    },
+    # Illinois went dynamic but now have an endpoint that would be pretty easy to parse:
+    # http://www.dph.illinois.gov/sitefiles/COVIDTestResults.json
+    # 'IL': {
+    #     'url': 'http://www.dph.illinois.gov/topics-services/diseases-and-conditions/diseases-a-z-list/coronavirus',
+    #     'stats': {
+    #         'total_cases': lambda soup: int(soup.select_one('dl dd .NumberHighlight h3').text),
+    #         'deaths': lambda soup: int(soup.select_one('.ckeditor-tabber > dd:nth-child(2) > div:nth-child(3) > div:nth-child(3) > h3:nth-child(2)').text),
+    #         'total_tested': lambda soup: int(soup.select_one('.ckeditor-tabber > dd:nth-child(2) > div:nth-child(3) > div:nth-child(4) > h3:nth-child(2)').text),
+    #     }
+    # },
     'KS': {
         'url': 'https://govstatus.egov.com/coronavirus',
         'stats': {
@@ -111,10 +113,10 @@ state_getters = {
         }
     },
     'MI': {
-        'url': 'https://www.michigan.gov/coronavirus',
+        'url': 'https://www.michigan.gov/coronavirus/0,9753,7-406-98163-520743--,00.html',
         'stats': {
-            'total_cases': lambda soup: int(soup.select_one('#comp_114411 table tbody tr:last-child td:nth-of-type(2)').text),
-            'deaths': lambda soup: int(soup.select_one('#comp_114411 table tbody tr:last-child td:nth-of-type(3)').text),
+            'total_cases': lambda soup: int(soup.select_one('.fullContent > table tr:last-child > td:nth-of-type(2)').text.strip().replace(',', '')),
+            'deaths': lambda soup: int(soup.select_one('.fullContent > table tr:last-child > td:last-child').text.strip().replace(',', '')),
         }
     },
     'MN': {
@@ -143,9 +145,9 @@ state_getters = {
     'NE': {
         'url': 'http://dhhs.ne.gov/Pages/Coronavirus.aspx',
         'stats': {
-            'total_cases': lambda soup: int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-child(17) > li:nth-child(1)').text.split()[-1]),
+            'total_cases': lambda soup: int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-child(17) > li:nth-child(1)').text.split()[-1].replace(',', '')),
             # Confirmed plus negative.
-            'total_tested': lambda soup: int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-child(17) > li:nth-child(1)').text.split()[-1]) + int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-child(18) > li:nth-child(1)').text.split()[-1].replace('*', '')),
+            'total_tested': lambda soup: int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-child(17) > li:nth-child(1)').text.split()[-1].replace(',', '')) + int(soup.select_one('#ctl00_PlaceHolderMain_ctl08__ControlWrapper_RichHtmlField > ul:nth-child(18) > li:nth-child(1)').text.split()[-1].replace(',', '').replace('*', '')),
         }
     },
     'NH': {
@@ -223,20 +225,21 @@ state_getters = {
             'total_cases': lambda soup: int(soup.select_one('.fifth-color table tr:nth-child(4) > td:nth-child(2)').text)
         }
     },
-    'TX': {
-        'url': 'https://www.dshs.state.tx.us/news/updates.shtm',
-        'stats': {
-            'total_cases': lambda soup: int(soup.select_one('table.zebraBorder:nth-child(7) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)').text.replace(',', '')),
-            'total_tested': lambda soup: int(soup.select_one('table.zebraBorder:nth-child(3) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)').text.replace(',', '')),
-            'deaths': lambda soup: int(soup.select_one('table.zebraBorder:nth-child(7) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)').text.replace(',', '')),
-        }
-    },
+    # Texas moved to arcgis
+    # 'TX': {
+    #     'url': 'https://www.dshs.state.tx.us/news/updates.shtm',
+    #     'stats': {
+    #         'total_cases': lambda soup: int(soup.select_one('table.zebraBorder:nth-child(7) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)').text.replace(',', '')),
+    #         'total_tested': lambda soup: int(soup.select_one('table.zebraBorder:nth-child(3) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)').text.replace(',', '')),
+    #         'deaths': lambda soup: int(soup.select_one('table.zebraBorder:nth-child(7) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)').text.replace(',', '')),
+    #     }
+    # },
     'VT': {
         'url': 'https://www.healthvermont.gov/response/infectious-disease/2019-novel-coronavirus',
         'stats': {
-            'total_cases': lambda soup: int(soup.select_one('.dynamic-height-wrap > div:nth-child(1) > table:nth-child(8) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)').text.replace(',', '')),
-            'total_tested': lambda soup: int(soup.select_one('.dynamic-height-wrap > div:nth-child(1) > table:nth-child(8) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2)').text.replace(',', '')),
-            'deaths': lambda soup: int(soup.select_one('.dynamic-height-wrap > div:nth-child(1) > table:nth-child(8) > tbody:nth-child(1) > tr:nth-child(3) > td:nth-child(2)').text.replace(',', '')),
+            'total_cases': lambda soup: int(soup.select_one('table tr:nth-child(1) > td:nth-child(2)').text.replace(',', '')),
+            'total_tested': lambda soup: int(soup.select_one('table tr:nth-child(2) > td:nth-child(2)').text.replace(',', '')),
+            'deaths': lambda soup: int(soup.select_one('table tr:nth-child(3) > td:nth-child(2)').text.replace(',', '')),
         }
     }
 }

@@ -10,43 +10,41 @@ Output is available as CSV, Markdown, or JSON. Specify `--format` as `csv`, `jso
 
 **Caution**: Be _very_ careful if running this script in a loop. Let's not overload anyone's servers.
 
-## Stats (as of Tuesday, March 24, 2020 5:15:35 PM GMT)
+## Stats (as of Wednesday, March 25, 2020 11:30:55 AM GMT)
 
-These are the only 30 states I plan to support for now. Others have bot-blockers, client-side rendering, or iframes
+These are the only states I plan to support for now. Others have bot-blockers, client-side rendering, or iframes
 loading from arcgis. Any help pulling data from those sources would be greatly appreciated.
 
 state | total_cases | total_tested | deaths
 --- | --- | --- | ---
-AK | 36 |  | 
-AL | 215 | 2321 | 0
-AR | 206 |  | 
-CA | 1733 |  | 27
-CO | 720 | 6224 | 7
-FL | 1412 |  | 18
-GA | 1026 |  | 32
-HI | 77 |  | 4
-ID | 2 |  | 0
-IL | 1285 | 9868 | 12
-KS | 82 |  | 
-KY | 124 | 1866 | 
-MA | 777 |  | 
+AK | 42 |  | 
+AL | 242 | 2321 | 0
+AR | 232 |  | 
+CA | 2102 |  | 40
+CO | 912 | 7701 | 11
+FL | 1467 |  | 20
+GA | 1097 |  | 38
+HI | 90 |  | 1
+ID | 1 |  | 0
+KS | 98 |  | 
+KY | 157 | 3022 | 
+MA | 1159 |  | 
 ME | 118 | 3132 | 
-MI | 293 |  | 7
+MI | 1791 |  | 24
 MN | 262 | 5812 | 1
-MO | 183 |  | 3
+MO | 255 |  | 5
 NC | 398 | 8502 | 0
-NE | 52 | 1027 | 
-NH | 101 | 869 | 1
-NJ | 2844 |  | 27
-NM | 83 | 5973 | 
-NY | 20875 |  | 
-OH | 442 |  | 6
+NE | 61 | 1365 | 
+NH | 108 | 2356 | 1
+NJ | 3675 |  | 44
+NM | 100 | 6842 | 
+NY | 25665 |  | 
+OH | 564 |  | 8
 OK | 106 | 841 | 3
-OR | 191 | 3840 | 
+OR | 209 | 4559 | 
 PA | 851 | 9494 | 7
 SD | 30 | 820 | 1
-TN | 615 |  | 
-TX | 410 | 11167 | 9
+TN | 667 |  | 
 VT | 95 | 1535 | 7
 
 ## Features Needed

@@ -1,0 +1,164 @@
+{
+    "AK": {
+        "state": "AK",
+        "total_cases": 36
+    },
+    "AL": {
+        "deaths": 0,
+        "state": "AL",
+        "total_cases": 215,
+        "total_tested": 2321
+    },
+    "AR": {
+        "state": "AR",
+        "total_cases": 218
+    },
+    "CA": {
+        "deaths": 40,
+        "state": "CA",
+        "total_cases": 2102
+    },
+    "CO": {
+        "deaths": 7,
+        "state": "CO",
+        "total_cases": 720,
+        "total_tested": 6224
+    },
+    "FL": {
+        "deaths": 18,
+        "state": "FL",
+        "total_cases": 1412
+    },
+    "GA": {
+        "deaths": 32,
+        "state": "GA",
+        "total_cases": 1026,
+        "total_tests": 5484
+    },
+    "HI": {
+        "deaths": 6,
+        "state": "HI",
+        "total_cases": 90
+    },
+    "ID": {
+        "deaths": 0,
+        "state": "ID",
+        "total_cases": 2,
+        "total_tests": 1537
+    },
+    "IL": {
+        "deaths": "",
+        "state": "IL",
+        "total_cases": "",
+        "total_tested": ""
+    },
+    "KS": {
+        "state": "KS",
+        "total_cases": 98
+    },
+    "KY": {
+        "state": "KY",
+        "total_cases": 157,
+        "total_tested": 3022
+    },
+    "MA": {
+        "state": "MA",
+        "total_cases": 1159
+    },
+    "ME": {
+        "state": "ME",
+        "total_cases": 118,
+        "total_tested": 3132
+    },
+    "MI": {
+        "deaths": "",
+        "state": "MI",
+        "total_cases": ""
+    },
+    "MN": {
+        "deaths": 1,
+        "state": "MN",
+        "total_cases": 262,
+        "total_tested": 5812
+    },
+    "MO": {
+        "deaths": 5,
+        "state": "MO",
+        "total_cases": 255
+    },
+    "NC": {
+        "deaths": 0,
+        "state": "NC",
+        "total_cases": 398,
+        "total_tested": 8502
+    },
+    "NE": {
+        "state": "NE",
+        "total_cases": 61,
+        "total_tested": ""
+    },
+    "NH": {
+        "deaths": 1,
+        "state": "NH",
+        "total_cases": 101,
+        "total_tested": 869
+    },
+    "NJ": {
+        "deaths": 44,
+        "state": "NJ",
+        "total_cases": 3675
+    },
+    "NM": {
+        "state": "NM",
+        "total_cases": 83,
+        "total_tested": 5973
+    },
+    "NY": {
+        "state": "NY",
+        "total_cases": 25665
+    },
+    "OH": {
+        "deaths": 8,
+        "state": "OH",
+        "total_cases": 564
+    },
+    "OK": {
+        "deaths": 3,
+        "state": "OK",
+        "total_cases": 106,
+        "total_tested": 841
+    },
+    "OR": {
+        "state": "OR",
+        "total_cases": 209,
+        "total_tested": 4559
+    },
+    "PA": {
+        "deaths": 7,
+        "state": "PA",
+        "total_cases": 851,
+        "total_tested": 9494
+    },
+    "SD": {
+        "deaths": 1,
+        "state": "SD",
+        "total_cases": 30,
+        "total_tested": 820
+    },
+    "TN": {
+        "state": "TN",
+        "total_cases": 667
+    },
+    "TX": {
+        "deaths": 9,
+        "state": "TX",
+        "total_cases": 410,
+        "total_tested": 11167
+    },
+    "VT": {
+        "deaths": 7,
+        "state": "VT",
+        "total_cases": 95,
+        "total_tested": 1535
+    }
+}
